@@ -64,16 +64,21 @@ Theta2_grad = zeros(size(Theta2));
 X = [ones(m, 1) X];
 
 for example = 1:m
+  % start of forward propagation to get the error at the output layer
   A1 = X(example,:);
   z2 = Theta1 * A1';
-  A2 = 1 ./ (1 + e .^ -z2);
+  A2 = sigmoid(z2);
   A2 = [ 1; A2];
-  prediction = 1 ./ (1 + e .^ -(Theta2 * A2));
-  expected_output = (1:num_labels == y(example));
+  prediction = sigmoid(Theta2 * A2);
+  expected_output = (1:num_labels == y(example));  % expected_output will be a vector of 0's and 1's
   J = J + sum(expected_output * log(prediction) + (1-expected_output) * log(1 - prediction));
+  % end of forward propagation
   
-  delta_3 = prediction - (expected_output)';
+  % start of the backpropagation
+  delta_3 = prediction - expected_output';
   
+  
+  % the error will be propageted backwards to all the layers except the input layer
   delta_2 = (Theta2' * delta_3) .* [1; sigmoidGradient(z2)];
   delta_2 = delta_2(2:end);
   
@@ -83,25 +88,10 @@ for example = 1:m
 end
 theta_1 = Theta1(:,2:size(Theta1, 2))(:);
 theta_2 = Theta2(:,2:size(Theta2, 2))(:);
-J = -J / m + lambda / (2 * m) * (sum(theta_1.*theta_1) + sum(theta_2.*theta_2));
+J = -J / m + lambda / (2 * m) * (sum(theta_1.^2) + sum(theta_2.^2));
 
-Theta1_grad = (1/m) * Theta1_grad + (lambda/m) * [zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
+Theta1_grad = (1/m) * Theta1_grad + (lambda/m) * [zeros(size(Theta1, 1), 1) Theta1(:,2:end)];  % only non-bias thetas will be regularized
 Theta2_grad = (1/m) * Theta2_grad + (lambda/m) * [zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 % -------------------------------------------------------------
 
