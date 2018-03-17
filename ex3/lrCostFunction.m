@@ -35,10 +35,10 @@ m = length(y); % number of training examples
 %
 
 reg_theta = [0; theta(2:size(theta, 1))];
-reg_terms = lambda * sum(reg_theta .^ 2);
-sigmoid = 1 ./ (1 + e .^ -(X * theta));
-J = 1 / m * (-y' * log(sigmoid) - (1 - y)' * log(1 -sigmoid) + reg_terms / 2);
-grad = 1 / m * (X' * (sigmoid - y) + lambda * reg_theta);
+reg_terms = lambda / (2 * m) * sum(reg_theta .^ 2);
+predictions = sigmoid(X * theta);
+J = 1 / m * (-y' * log(predictions) - (1 - y)' * log(1 -predictions)) + reg_terms;
+grad = 1 / m * (X' * (predictions - y) + lambda * reg_theta);
 
 % =============================================================
 
