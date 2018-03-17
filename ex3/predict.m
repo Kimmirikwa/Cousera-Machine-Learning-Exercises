@@ -25,21 +25,13 @@ X = [ones(m, 1) X];
 predictions = zeros(m, num_labels);
 
 for example = 1:m
-  A1 = 1 ./ (1 + e .^ -(Theta1 * X(example, :)'));
+  A1 = sigmoid(Theta1 * X(example, :)');
   A1 = [1; A1];
-  predictions(example, :) = (1 ./ (1 + e .^ -(Theta2 * A1)))';
- end;
+  predictions(example, :) = sigmoid(Theta2 * A1)';
+endfor;
  
- [predict_max, index_max] = max(predictions, [], 2);
+ [predict_max, index_max] = max(predictions, [], 2);  % getting the max of the rows
  p = index_max;
-
-
-
-
-
-
-
-
 
 % =========================================================================
 

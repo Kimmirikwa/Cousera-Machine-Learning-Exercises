@@ -30,9 +30,12 @@ X = [ones(m, 1) X];
 %       for each row.
 % 
 
-predict = sigmoid(X * all_theta');
-[predict_max, index_max] = max(predict, [], 2);
-p = index_max;   
+% predictions will be m x (n + 1)
+% to get the class, we get the index of the highest probability of the rows
+% whose elements are the probabilities of the classes
+predictions = sigmoid(X * all_theta');
+[predict_max, index_max] = max(predictions, [], 2);
+p = index_max;  % the indices of the predicted classes 
 
 
 
