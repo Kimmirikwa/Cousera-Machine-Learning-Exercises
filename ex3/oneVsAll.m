@@ -52,19 +52,13 @@ X = [ones(m, 1) X];
 for c = 1 : num_labels
   initial_theta = zeros(n + 1, 1);
   options = optimset('GradObj', 'on', 'MaxIter', 50);
+  
+  % y == c will result to a vector of 1's and 0's.
+  % 1's at the locations where c is equal to the value and vice versa
+  % for example [1 4 3 2 4 4 2] == 4 will result to [0 1 0 0 1 1 0]
   [theta] = fmincg(@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
   all_theta(c, :) = theta';
  end
-
-
-
-
-
-
-
-
-
-
 
 
 % =========================================================================
