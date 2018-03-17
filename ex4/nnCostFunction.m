@@ -86,9 +86,9 @@ for example = 1:m
 	Theta2_grad = Theta2_grad + delta_3 * A2';
   
 end
-theta_1 = Theta1(:,2:size(Theta1, 2))(:);
-theta_2 = Theta2(:,2:size(Theta2, 2))(:);
-J = -J / m + lambda / (2 * m) * (sum(theta_1.^2) + sum(theta_2.^2));
+theta_1_reg = Theta1(:,2:end)(:);
+theta_2_reg = Theta2(:,2:end)(:);
+J = -J / m + lambda / (2 * m) * (sum(theta_1_reg.^2) + sum(theta_2_reg.^2));
 
 Theta1_grad = (1/m) * Theta1_grad + (lambda/m) * [zeros(size(Theta1, 1), 1) Theta1(:,2:end)];  % only non-bias thetas will be regularized
 Theta2_grad = (1/m) * Theta2_grad + (lambda/m) * [zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
