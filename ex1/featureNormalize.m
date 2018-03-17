@@ -23,9 +23,15 @@ function [X_norm, mu, sigma] = featureNormalize(X)
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %  
-sigma = std(X);
-mu = mean(X);
-X_norm = [(X(:,1) - mu(1,1)) / sigma(1,1) (X(:,2) - mu(1,2)) / sigma(1,2)];
+sigma = std(X);  % the standard deviation
+mu = mean(X);  % the mean of the features, does the mean of the columns
+
+% normalization for datasets of all sizes, any number of features or examples
+X_norm = zeros(size(X, 1), size(X, 2));
+
+for i = 1:size(X, 2)
+  X_norm(:, i) = (X(:, i) - mu(1, i)) / sigma(1, i);
+endfor
     
 
 
