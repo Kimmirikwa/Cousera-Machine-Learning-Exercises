@@ -56,7 +56,7 @@ error_val   = zeros(m, 1);
 for i=1:m
   theta = trainLinearReg(X(1:i,:), y(1:i), lambda);
   training_cost = linearRegCostFunction(X(1:i,:), y(1:i), theta, 0);
-  validation_cost = linearRegCostFunction(Xval, yval, theta, 0);
+  validation_cost = linearRegCostFunction(Xval, yval, theta, 0); % using all the validation set
   
   error_train(i) = training_cost;
   error_val(i) = validation_cost;
