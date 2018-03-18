@@ -21,20 +21,9 @@ grad = zeros(size(theta));
 predictions = X * theta;
 diffs = (predictions - y);
 squared_diffs = diffs .^ 2;
-J = 1 / (2 * m) * (sum(squared_diffs) + lambda * sum(theta(2:end) .* theta(2:end)));
+J = 1 / (2 * m) * (sum(squared_diffs) + lambda * sum(theta(2:end) .^ 2));
 
 grad = 1 / m * (X' * diffs + [0; lambda * theta(2:end)]);
-
-
-
-
-
-
-
-
-
-
-
 
 
 % =========================================================================
