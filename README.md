@@ -1,2 +1,2 @@
 # Cousera-Machine-Learning-Exercises
-The solutions to the cousera machine leaning course exercises
+This repo contains the solutions to the 8 exercises of Cousera Machine Learning course I have finished recently.
