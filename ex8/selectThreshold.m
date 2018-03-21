@@ -8,7 +8,6 @@ function [bestEpsilon bestF1] = selectThreshold(yval, pval)
 
 bestEpsilon = 0;
 bestF1 = 0;
-F1 = 0;
 
 stepsize = (max(pval) - min(pval)) / 1000;
 for epsilon = min(pval):stepsize:max(pval)
@@ -30,14 +29,6 @@ for epsilon = min(pval):stepsize:max(pval)
     prec = tp / (tp + fp);
     rec = tp / (tp + fn);
     F1 = (2 * prec * rec) / (prec + rec);
-
-
-
-
-
-
-
-
 
 
     % =============================================================
